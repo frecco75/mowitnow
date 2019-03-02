@@ -1,0 +1,7 @@
+language: java
+jdk:
+  - oraclejdk13
+sudo: false
+install: ./mvnw clean install
+script: ./mvnw clean verify
+after_script: ./mvnw cobertura:cobertura coveralls:report

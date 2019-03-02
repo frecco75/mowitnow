@@ -1,0 +1,36 @@
+@startuml
+start
+partition "File parsing" {
+    :Read program args;
+    if(args number is 1?) then (yes)
+        :arg as file
+        //from file system//;
+    else (no)
+        :default file
+        //from classpath//;
+    endif
+    :parse lines;
+    if(errors?) then (yes)
+        :print errors;
+        stop
+    else (no)
+    endif;
+}
+-> lawn with mowers at start position and instructions;
+partition "Process" {
+    while (mowers?)
+        -> mower;
+        while (instructions?)
+            -> instruction;
+            :execute instruction;
+            if(position valid?) then (yes)
+                :move mower;
+            else (no)
+            endif
+        endwhile
+        :mower prints its position;
+    endwhile
+}
+-> lawn with mowers at final positions;
+stop
+@enduml
